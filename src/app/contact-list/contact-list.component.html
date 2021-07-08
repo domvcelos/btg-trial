@@ -1,0 +1,17 @@
+<div class="container">
+  <accordion>
+    <accordion-group *ngFor="let contact of contactList; let i = index" [isOpen]="true" [isDisabled]="true">
+      <div class="btn btn-link btn-block clearfix" accordion-heading>
+        <div class="pull-left float-left">{{contact.nome}}</div>
+        <span class="badge float-right pull-right"
+          ><button (click)="deleteModal(contact)"><i-bs name="trash"></i-bs></button
+        ></span>
+        <span class="badge float-right pull-right"
+          ><button (click)="editModal(contact)">
+            <i-bs name="pencil-square"> </i-bs></button
+        ></span>
+      </div>
+      This is just some content to illustrate fancy headings.
+    </accordion-group>
+  </accordion>
+</div>

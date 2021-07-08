@@ -12,10 +12,22 @@ import {
 } from 'ng-bootstrap-form-validation';
 import { CUSTOM_ERRORS } from 'src/utils/custom-errors';
 import { IConfig, NgxMaskModule } from 'ngx-mask';
+import { ContactListComponent } from './contact-list/contact-list.component';
+import { AccordionModule } from 'ngx-bootstrap/accordion';
+import {
+  NgxBootstrapIconsModule,
+  trash,
+  pencilSquare,
+} from 'ngx-bootstrap-icons';
+import { HttpClientModule } from '@angular/common/http';
 
 export const options: Partial<IConfig> | (() => Partial<IConfig>) = null;
+const icons = {
+  trash,
+  pencilSquare,
+};
 @NgModule({
-  declarations: [AppComponent, CreateContactComponent],
+  declarations: [AppComponent, CreateContactComponent, ContactListComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -26,6 +38,9 @@ export const options: Partial<IConfig> | (() => Partial<IConfig>) = null;
     NgBootstrapFormValidationModule.forRoot(),
     NgBootstrapFormValidationModule,
     NgxMaskModule.forRoot(),
+    AccordionModule.forRoot(),
+    NgxBootstrapIconsModule.pick(icons),
+    HttpClientModule,
   ],
   providers: [
     {
