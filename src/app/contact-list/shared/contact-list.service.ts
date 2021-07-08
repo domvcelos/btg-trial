@@ -1,12 +1,10 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { take } from 'rxjs/operators';
-import { of } from 'rxjs';
 import { Contact } from 'src/app/create-contact/shared/contact.model';
 import { environment } from 'src/environments/environment';
-import { CONTACTLIST } from './contact-list.mock';
+
 
 @Injectable({
   providedIn: 'root',
@@ -30,12 +28,9 @@ export class ContactListService {
       .pipe(take(1));
   }
 
-  //   getContactList(): Observable<Contact[]> {
-  //     return this.httpClient.get<any>(`${this.apiUrl}/contact`).pipe(take(1));
-  //   }
-
   getContactList(): Observable<Contact[]> {
-    return of(CONTACTLIST);
+    let contacts: Contact[] = localStorage.contacts ? JSON.parse(localStorage.contacts): [];
+    return of(contacts);
   }
 
   deleteContact(contactId: string): Observable<any> {

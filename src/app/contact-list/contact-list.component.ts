@@ -3,6 +3,8 @@ import { Contact } from '../create-contact/shared/contact.model';
 import { ContactListService } from './shared/contact-list.service';
 import { PageChangedEvent } from 'ngx-bootstrap/pagination';
 import { TypeaheadMatch } from 'ngx-bootstrap/typeahead';
+import { CreateContactService } from '../create-contact/shared/create-contact.serivce';
+import { Subscription } from 'rxjs';
 @Component({
   selector: 'app-contact-list',
   templateUrl: './contact-list.component.html',
@@ -15,13 +17,21 @@ export class ContactListComponent implements OnInit {
   paginatedContactList: Contact[];
   itemsPerPage = 6;
   searchInput: string;
-  constructor(private service: ContactListService) {}
+  clickEventsubscription: Subscription;
+  constructor(
+    private contactListService: ContactListService,
+    private createContactService: CreateContactService
+  ) {
+    this.clickEventsubscription = this.createContactService
+      .getReloadEvent()
+      .subscribe(() => {
+        console.log('load');
+        this.getContacts();
+      });
+  }
 
   ngOnInit(): void {
-    this.service
-      .getContactList()
-      .subscribe((CONTACTLIST) => (this.contactList = CONTACTLIST));
-    this.paginatedContactList = this.contactList.slice(0, this.itemsPerPage);
+    this.getContacts();
   }
   editModal(contact: Contact) {
     console.log(`edit ${contact}`);
@@ -39,5 +49,11 @@ export class ContactListComponent implements OnInit {
     this.filtredContactList = this.contactList.filter(function (contact) {
       return contact.nome.toUpperCase().match(event.toUpperCase());
     });
+  }
+  getContacts() {
+    this.contactListService
+      .getContactList()
+      .subscribe((CONTACTLIST) => (this.contactList = CONTACTLIST));
+    this.paginatedContactList = this.contactList.slice(0, this.itemsPerPage);
   }
 }

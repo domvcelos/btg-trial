@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Contact } from './shared/contact.model';
+import { CreateContactService } from './shared/create-contact.serivce';
 
 @Component({
   selector: 'app-create-contact',
@@ -8,35 +9,7 @@ import { Contact } from './shared/contact.model';
   styleUrls: ['./create-contact.component.scss'],
 })
 export class CreateContactComponent implements OnInit {
-  ufs = [
-    'AC',
-    'AM',
-    'RR',
-    'PA',
-    'AP',
-    'TO',
-    'MA',
-    'PI',
-    'CE',
-    'RN',
-    'PB',
-    'PE',
-    'AL',
-    'SE',
-    'BA',
-    'MG',
-    'ES',
-    'RJ',
-    'SP',
-    'RO',
-    'PR',
-    'SC',
-    'RS',
-    'MS',
-    'MT',
-    'GO',
-    'DF',
-  ];
+  ufs: string[];
   contactFormGroup: FormGroup;
   contact: Contact = {
     nome: '',
@@ -48,7 +21,7 @@ export class CreateContactComponent implements OnInit {
     uf: '',
   };
   public name: string;
-  constructor() {}
+  constructor(private service: CreateContactService) {}
 
   ngOnInit(): void {
     this.contactFormGroup = new FormGroup({
@@ -60,9 +33,11 @@ export class CreateContactComponent implements OnInit {
       localidade: new FormControl('', [Validators.required]),
       uf: new FormControl('', [Validators.required]),
     });
+    this.service.getUfList().subscribe((UFLIST) => (this.ufs = UFLIST));
   }
   onSubmit() {
-    console.log(this.contactFormGroup);
+    this.service.createContact(this.contactFormGroup.value)
+    this.onReset()
   }
   onReset() {
     this.contactFormGroup.reset();

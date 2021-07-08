@@ -41,7 +41,7 @@
       </div>
     </accordion-group>
     <pagination
-      [totalItems]="contactList.length"
+      [totalItems]="contactList ? contactList.length : 0"
       [itemsPerPage]="itemsPerPage"
       (pageChanged)="pageChanged($event)"
     ></pagination>
