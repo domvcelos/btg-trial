@@ -4,3 +4,23 @@
     margin-bottom: 10px;
   }
 }
+.accordion-body {
+  display: flex;
+  justify-content: space-between;
+  .accordion-body__left {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+  }
+  .accordion-body__center {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+  }
+  .accordion-body__right {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+  }
+}
+

@@ -3,7 +3,7 @@
 /* Importing Bootstrap SCSS file. */
 @import "~bootstrap/dist/css/bootstrap.min.css";
 
-* {
+*, p {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
@@ -24,4 +24,10 @@ input {
   --white: #fff;
   --bg: #f4f8fb;
   --shadow: rgba(0, 0, 0, 0.1);
+}
+.card-body {
+  padding: 10px !important;
+}
+.card-header {
+  padding: 0 !important;
 }

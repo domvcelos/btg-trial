@@ -1,17 +1,83 @@
 <div class="container">
-  <accordion>
-    <accordion-group *ngFor="let contact of contactList; let i = index" [isOpen]="true" [isDisabled]="true">
+  <div class="form-group">
+    <input
+      [(ngModel)]="contactName"
+      (ngModelChange)="onKey($event)"
+      placeholder="Pesquisar por nome"
+      class="form-control"
+    />
+  </div>
+  <accordion *ngIf="!contactName">
+    <accordion-group
+      *ngFor="let contact of paginatedContactList; let i = index"
+      [isOpen]="true"
+      [isDisabled]="true"
+    >
       <div class="btn btn-link btn-block clearfix" accordion-heading>
-        <div class="pull-left float-left">{{contact.nome}}</div>
+        <div class="pull-left float-left">{{ contact.nome }}</div>
         <span class="badge float-right pull-right"
-          ><button (click)="deleteModal(contact)"><i-bs name="trash"></i-bs></button
+          ><button (click)="deleteModal(contact)">
+            <i-bs name="trash"></i-bs></button
         ></span>
         <span class="badge float-right pull-right"
           ><button (click)="editModal(contact)">
             <i-bs name="pencil-square"> </i-bs></button
         ></span>
       </div>
-      This is just some content to illustrate fancy headings.
+      <div class="accordion-body">
+        <div class="accordion-body__left">
+          <p><b>CPF:</b> {{ contact.cpf | mask: "000.000.000-00" }}</p>
+
+          <p><b>CEP:</b> {{ contact.cep }}</p>
+        </div>
+        <div class="accordion-body__center">
+          <p><b>Logradouro:</b> {{ contact.logradouro }}</p>
+          <p><b>Bairro:</b> {{ contact.bairro }}</p>
+        </div>
+        <div class="accordion-body__right">
+          <p><b>Localidade:</b> {{ contact.bairro }}</p>
+          <p><b>UF:</b> {{ contact.uf }}</p>
+        </div>
+      </div>
+    </accordion-group>
+    <pagination
+      [totalItems]="contactList.length"
+      [itemsPerPage]="itemsPerPage"
+      (pageChanged)="pageChanged($event)"
+    ></pagination>
+  </accordion>
+  <accordion *ngIf="contactName">
+    <accordion-group
+      *ngFor="let contact of filtredContactList; let i = index"
+      [isOpen]="true"
+      [isDisabled]="true"
+    >
+      <div class="btn btn-link btn-block clearfix" accordion-heading>
+        <div class="pull-left float-left">{{ contact.nome }}</div>
+        <span class="badge float-right pull-right"
+          ><button (click)="deleteModal(contact)">
+            <i-bs name="trash"></i-bs></button
+        ></span>
+        <span class="badge float-right pull-right"
+          ><button (click)="editModal(contact)">
+            <i-bs name="pencil-square"> </i-bs></button
+        ></span>
+      </div>
+      <div class="accordion-body">
+        <div class="accordion-body__left">
+          <p><b>CPF:</b> {{ contact.cpf | mask: "000.000.000-00" }}</p>
+
+          <p><b>CEP:</b> {{ contact.cep }}</p>
+        </div>
+        <div class="accordion-body__center">
+          <p><b>Logradouro:</b> {{ contact.logradouro }}</p>
+          <p><b>Bairro:</b> {{ contact.bairro }}</p>
+        </div>
+        <div class="accordion-body__right">
+          <p><b>Localidade:</b> {{ contact.bairro }}</p>
+          <p><b>UF:</b> {{ contact.uf }}</p>
+        </div>
+      </div>
     </accordion-group>
   </accordion>
 </div>

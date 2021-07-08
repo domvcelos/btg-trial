@@ -20,6 +20,7 @@ import {
   pencilSquare,
 } from 'ngx-bootstrap-icons';
 import { HttpClientModule } from '@angular/common/http';
+import { PaginationModule, PaginationConfig } from 'ngx-bootstrap/pagination';
 
 export const options: Partial<IConfig> | (() => Partial<IConfig>) = null;
 const icons = {
@@ -41,6 +42,7 @@ const icons = {
     AccordionModule.forRoot(),
     NgxBootstrapIconsModule.pick(icons),
     HttpClientModule,
+    PaginationModule,
   ],
   providers: [
     {
@@ -48,6 +50,7 @@ const icons = {
       useValue: CUSTOM_ERRORS,
       multi: true,
     },
+    PaginationConfig,
   ],
   bootstrap: [AppComponent],
 })
