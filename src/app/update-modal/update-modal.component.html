@@ -10,7 +10,11 @@
   </button>
 </div>
 <div class="modal-body">
-  <form [formGroup]="contactFormGroup" #contactEditForm="ngForm" (ngSubmit)="onSubmit()">
+  <form
+    [formGroup]="contactFormGroup"
+    #contactEditForm="ngForm"
+    (ngSubmit)="onSubmit()"
+  >
     <div class="form-group">
       <label for="nome" class="control-label">Nome</label>
       <input
@@ -69,14 +73,9 @@
     </div>
     <div class="form-group">
       <label for="uf" class="control-label">UF</label>
-      <input
-        formControlName="uf"
-        [typeahead]="ufs"
-        [typeaheadOptionsLimit]="7"
-        [typeaheadMinLength]="0"
-        placeholder="Pesquise sua Unidade Federativa"
-        class="form-control"
-      />
+      <select class="form-control" formControlName="uf">
+        <option *ngFor="let uf of ufs" [ngValue]="uf">{{ uf }}</option>
+      </select>
     </div>
   </form>
 </div>
@@ -84,7 +83,26 @@
   <button type="button" class="btn btn-default" (click)="bsModalRef.hide()">
     Cancelar
   </button>
-  <button type="button" class="btn btn-primary" (click)="contactEditForm.ngSubmit.emit()">
+  <button
+    type="button"
+    class="btn btn-primary"
+    [popover]="popConfirm"
+    popoverTitle="Confirmação de alteração"
+    [adaptivePosition]="false"
+    [outsideClick]="true"
+  >
     Editar
   </button>
+  <ng-template #popConfirm
+    >Você tem certeza?
+    <button
+      type="button"
+      class="btn btn-danger"
+      [popover]="popTemplate"
+      popoverTitle="Dynamic html inside"
+      (click)="contactEditForm.ngSubmit.emit()"
+    >
+      Confirmar
+    </button></ng-template
+  >
 </div>

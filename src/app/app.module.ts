@@ -24,6 +24,7 @@ import { PaginationModule, PaginationConfig } from 'ngx-bootstrap/pagination';
 import { DeleteModalComponent } from './delete-modal/delete-modal.component';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { UpdateModalComponent } from './update-modal/update-modal.component';
+import { PopoverModule } from 'ngx-bootstrap/popover';
 
 export const options: Partial<IConfig> | (() => Partial<IConfig>) = null;
 const icons = {
@@ -53,6 +54,7 @@ const icons = {
     HttpClientModule,
     PaginationModule,
     ModalModule.forRoot(),
+    PopoverModule.forRoot(),
   ],
   providers: [
     {

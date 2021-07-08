@@ -64,14 +64,12 @@
     </div>
     <div class="form-group">
       <label for="uf" class="control-label">UF</label>
-      <input
-        formControlName="uf"
-        [typeahead]="ufs"
-        [typeaheadOptionsLimit]="7"
-        [typeaheadMinLength]="0"
-        placeholder="Pesquise sua Unidade Federativa"
+      <select
         class="form-control"
-      />
+        formControlName="uf"
+      >
+        <option *ngFor="let uf of ufs" [ngValue]="uf">{{ uf }}</option>
+      </select>
     </div>
     <button class="btn btn-primary pull-right" type="submit">Salvar</button>
   </form>
