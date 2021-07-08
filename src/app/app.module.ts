@@ -11,7 +11,9 @@ import {
   NgBootstrapFormValidationModule,
 } from 'ng-bootstrap-form-validation';
 import { CUSTOM_ERRORS } from 'src/utils/custom-errors';
+import { IConfig, NgxMaskModule } from 'ngx-mask';
 
+export const options: Partial<IConfig> | (() => Partial<IConfig>) = null;
 @NgModule({
   declarations: [AppComponent, CreateContactComponent],
   imports: [
@@ -23,6 +25,7 @@ import { CUSTOM_ERRORS } from 'src/utils/custom-errors';
     TypeaheadModule.forRoot(),
     NgBootstrapFormValidationModule.forRoot(),
     NgBootstrapFormValidationModule,
+    NgxMaskModule.forRoot(),
   ],
   providers: [
     {

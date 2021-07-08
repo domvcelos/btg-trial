@@ -1,0 +1,34 @@
+.grid-container {
+  height: 100%;
+  display: grid;
+  grid-template-areas:
+    "TP TP"
+    "LF RG";
+  grid-template-rows: 80px auto;
+  grid-template-columns: 40% auto;
+  .grid-container__top {
+    grid-area: TP;
+    display: flex;
+    align-items: center;
+    padding: 15px;
+    z-index: 1;
+    -webkit-box-shadow: 2px 3px 9px 4px var(--shadow);
+    box-shadow: 2px 3px 9px 4px var(--shadow);
+    background-color: var(--white);
+    h3 {
+      font-weight: 600;
+    }
+  }
+  .grid-container__left {
+    z-index: 2;
+    grid-area: LF;
+    padding: 15px;
+    -webkit-box-shadow: 2px 13px 9px 4px var(--shadow);
+    box-shadow: 2px 13px 9px 4px var(--shadow);
+    background-color: var(--white);
+  }
+  .grid-container__right {
+    grid-area: RG;
+    background-color: var(--bg);
+  }
+}
