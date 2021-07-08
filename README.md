@@ -17,7 +17,7 @@ Detalhes da Implementação projeto
 * Deverá conter um select para selecionar a UF;
 
 Contrato de Dados
-```json
+```
 {
     id: string;
     nome: string;
