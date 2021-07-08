@@ -1,0 +1,90 @@
+<div class="modal-header">
+  <h4 class="modal-title pull-left">Editar cadastro</h4>
+  <button
+    type="button"
+    class="close pull-right"
+    aria-label="Close"
+    (click)="bsModalRef.hide()"
+  >
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+  <form [formGroup]="contactFormGroup" #contactEditForm="ngForm" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <label for="nome" class="control-label">Nome</label>
+      <input
+        type="text"
+        class="form-control"
+        formControlName="nome"
+        id="nome"
+      />
+    </div>
+    <div class="form-group">
+      <label for="cpf" class="control-label">CPF</label>
+      <input
+        type="text"
+        class="form-control"
+        mask="000.000.000-00"
+        formControlName="cpf"
+        id="cpf"
+      />
+    </div>
+    <div class="form-group">
+      <label for="cep" class="control-label">CEP</label>
+      <input
+        type="text"
+        class="form-control"
+        mask="00.000-000"
+        formControlName="cep"
+        id="cep"
+      />
+    </div>
+    <div class="form-group">
+      <label for="logradouro" class="control-label">Logradouro</label>
+      <input
+        type="text"
+        class="form-control"
+        formControlName="logradouro"
+        id="logradouro"
+      />
+    </div>
+    <div class="form-group">
+      <label for="bairro" class="control-label">Bairro</label>
+      <input
+        type="text"
+        class="form-control"
+        formControlName="bairro"
+        id="bairro"
+      />
+    </div>
+    <div class="form-group">
+      <label for="localidade" class="control-label">Localidade</label>
+      <input
+        type="text"
+        class="form-control"
+        formControlName="localidade"
+        id="localidade"
+      />
+    </div>
+    <div class="form-group">
+      <label for="uf" class="control-label">UF</label>
+      <input
+        formControlName="uf"
+        [typeahead]="ufs"
+        [typeaheadOptionsLimit]="7"
+        [typeaheadMinLength]="0"
+        placeholder="Pesquise sua Unidade Federativa"
+        class="form-control"
+      />
+    </div>
+  </form>
+</div>
+<div class="modal-footer">
+  <button type="button" class="btn btn-default" (click)="bsModalRef.hide()">
+    Cancelar
+  </button>
+  <button type="button" class="btn btn-primary" (click)="contactEditForm.ngSubmit.emit()">
+    Editar
+  </button>
+</div>

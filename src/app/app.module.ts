@@ -23,6 +23,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { PaginationModule, PaginationConfig } from 'ngx-bootstrap/pagination';
 import { DeleteModalComponent } from './delete-modal/delete-modal.component';
 import { ModalModule } from 'ngx-bootstrap/modal';
+import { UpdateModalComponent } from './update-modal/update-modal.component';
 
 export const options: Partial<IConfig> | (() => Partial<IConfig>) = null;
 const icons = {
@@ -35,6 +36,7 @@ const icons = {
     CreateContactComponent,
     ContactListComponent,
     DeleteModalComponent,
+    UpdateModalComponent,
   ],
   imports: [
     BrowserModule,

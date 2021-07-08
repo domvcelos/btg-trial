@@ -8,6 +8,7 @@ import { Subscription } from 'rxjs';
 import { TemplateRef } from '@angular/core';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 import { DeleteModalComponent } from '../delete-modal/delete-modal.component';
+import { UpdateModalComponent } from '../update-modal/update-modal.component';
 @Component({
   selector: 'app-contact-list',
   templateUrl: './contact-list.component.html',
@@ -37,7 +38,11 @@ export class ContactListComponent implements OnInit {
     this.getContacts();
   }
   editModal(contact: Contact) {
-    console.log(`edit ${contact}`);
+    const initialState = {
+      contact: contact
+    };
+    this.modalRef = this.modalService.show(UpdateModalComponent, {initialState});
+    
   }
 
   deleteModal(contact: Contact) {

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
+import { BsModalRef } from 'ngx-bootstrap/modal';
 import { Contact } from '../create-contact/shared/contact.model';
 import { ContactService } from '../create-contact/shared/contact.serivce';
 
@@ -9,7 +9,6 @@ import { ContactService } from '../create-contact/shared/contact.serivce';
   styleUrls: ['./delete-modal.component.scss'],
 })
 export class DeleteModalComponent implements OnInit {
-  closeBtnName: string;
   contact: Contact;
   constructor(public bsModalRef: BsModalRef, private service: ContactService) {}
 

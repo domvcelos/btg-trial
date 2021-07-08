@@ -15,7 +15,7 @@ export class ContactService {
   getReloadEvent(): Observable<any> {
     return this.subject.asObservable();
   }
-  createContact(contact: Contact) {
+  createContact(contact: Contact): void {
     contact.id = uuidv4();
     let storedContacts: Contact[] = localStorage.contacts
       ? JSON.parse(localStorage.contacts)
@@ -28,13 +28,30 @@ export class ContactService {
     return of(UFLIST);
   }
   getContactList(): Observable<Contact[]> {
-    let contacts: Contact[] = localStorage.contacts ? JSON.parse(localStorage.contacts): [];
+    let contacts: Contact[] = localStorage.contacts
+      ? JSON.parse(localStorage.contacts)
+      : [];
     return of(contacts);
   }
 
   deleteContact(contactId: string): void {
-    const contacts: Contact[] = localStorage.contacts ? JSON.parse(localStorage.contacts): [];
-    const newListcontacts: Contact[] = contacts.filter(contact => contact.id !== contactId);
+    const contacts: Contact[] = localStorage.contacts
+      ? JSON.parse(localStorage.contacts)
+      : [];
+    const newListcontacts: Contact[] = contacts.filter(
+      (contact) => contact.id !== contactId
+    );
+    localStorage.contacts = JSON.stringify(newListcontacts);
+    this.sendReloadEvent();
+  }
+  editContact(contact: Contact): void {
+    const contacts: Contact[] = localStorage.contacts
+      ? JSON.parse(localStorage.contacts)
+      : [];
+    let newListcontacts: Contact[] = contacts.filter(
+      (contactStored) => contactStored.id !== contact.id
+    );
+    newListcontacts.push(contact);
     localStorage.contacts = JSON.stringify(newListcontacts);
     this.sendReloadEvent();
   }
