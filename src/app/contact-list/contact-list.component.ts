@@ -1,10 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { Contact } from '../create-contact/shared/contact.model';
-import { ContactListService } from './shared/contact-list.service';
+
 import { PageChangedEvent } from 'ngx-bootstrap/pagination';
 import { TypeaheadMatch } from 'ngx-bootstrap/typeahead';
-import { CreateContactService } from '../create-contact/shared/create-contact.serivce';
+import { ContactService } from '../create-contact/shared/contact.serivce';
 import { Subscription } from 'rxjs';
+import { TemplateRef } from '@angular/core';
+import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
+import { DeleteModalComponent } from '../delete-modal/delete-modal.component';
 @Component({
   selector: 'app-contact-list',
   templateUrl: './contact-list.component.html',
@@ -18,14 +21,14 @@ export class ContactListComponent implements OnInit {
   itemsPerPage = 6;
   searchInput: string;
   clickEventsubscription: Subscription;
+  modalRef: BsModalRef;
   constructor(
-    private contactListService: ContactListService,
-    private createContactService: CreateContactService
+    private service: ContactService,
+    private modalService: BsModalService
   ) {
-    this.clickEventsubscription = this.createContactService
+    this.clickEventsubscription = this.service
       .getReloadEvent()
       .subscribe(() => {
-        console.log('load');
         this.getContacts();
       });
   }
@@ -36,8 +39,12 @@ export class ContactListComponent implements OnInit {
   editModal(contact: Contact) {
     console.log(`edit ${contact}`);
   }
+
   deleteModal(contact: Contact) {
-    console.log(`delete ${contact}`);
+    const initialState = {
+      contact: contact
+    };
+    this.modalRef = this.modalService.show(DeleteModalComponent, {initialState});
   }
   pageChanged(event: PageChangedEvent): void {
     const startItem = (event.page - 1) * event.itemsPerPage;
@@ -51,7 +58,7 @@ export class ContactListComponent implements OnInit {
     });
   }
   getContacts() {
-    this.contactListService
+    this.service
       .getContactList()
       .subscribe((CONTACTLIST) => (this.contactList = CONTACTLIST));
     this.paginatedContactList = this.contactList.slice(0, this.itemsPerPage);

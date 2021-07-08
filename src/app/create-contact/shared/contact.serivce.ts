@@ -7,7 +7,7 @@ import { v4 as uuidv4 } from 'uuid';
 @Injectable({
   providedIn: 'root',
 })
-export class CreateContactService {
+export class ContactService {
   private subject = new Subject<any>();
   sendReloadEvent() {
     this.subject.next();
@@ -17,7 +17,6 @@ export class CreateContactService {
   }
   createContact(contact: Contact) {
     contact.id = uuidv4();
-    console.log(contact);
     let storedContacts: Contact[] = localStorage.contacts
       ? JSON.parse(localStorage.contacts)
       : [];
@@ -27,5 +26,16 @@ export class CreateContactService {
   }
   getUfList(): Observable<string[]> {
     return of(UFLIST);
+  }
+  getContactList(): Observable<Contact[]> {
+    let contacts: Contact[] = localStorage.contacts ? JSON.parse(localStorage.contacts): [];
+    return of(contacts);
+  }
+
+  deleteContact(contactId: string): void {
+    const contacts: Contact[] = localStorage.contacts ? JSON.parse(localStorage.contacts): [];
+    const newListcontacts: Contact[] = contacts.filter(contact => contact.id !== contactId);
+    localStorage.contacts = JSON.stringify(newListcontacts);
+    this.sendReloadEvent();
   }
 }

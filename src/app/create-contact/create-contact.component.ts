@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Contact } from './shared/contact.model';
-import { CreateContactService } from './shared/create-contact.serivce';
+import { ContactService } from './shared/contact.serivce';
+
 
 @Component({
   selector: 'app-create-contact',
@@ -21,7 +22,7 @@ export class CreateContactComponent implements OnInit {
     uf: '',
   };
   public name: string;
-  constructor(private service: CreateContactService) {}
+  constructor(private service: ContactService) {}
 
   ngOnInit(): void {
     this.contactFormGroup = new FormGroup({

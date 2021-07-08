@@ -21,6 +21,8 @@ import {
 } from 'ngx-bootstrap-icons';
 import { HttpClientModule } from '@angular/common/http';
 import { PaginationModule, PaginationConfig } from 'ngx-bootstrap/pagination';
+import { DeleteModalComponent } from './delete-modal/delete-modal.component';
+import { ModalModule } from 'ngx-bootstrap/modal';
 
 export const options: Partial<IConfig> | (() => Partial<IConfig>) = null;
 const icons = {
@@ -28,7 +30,12 @@ const icons = {
   pencilSquare,
 };
 @NgModule({
-  declarations: [AppComponent, CreateContactComponent, ContactListComponent],
+  declarations: [
+    AppComponent,
+    CreateContactComponent,
+    ContactListComponent,
+    DeleteModalComponent,
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -43,6 +50,7 @@ const icons = {
     NgxBootstrapIconsModule.pick(icons),
     HttpClientModule,
     PaginationModule,
+    ModalModule.forRoot(),
   ],
   providers: [
     {
