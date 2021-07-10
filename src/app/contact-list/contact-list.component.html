@@ -7,7 +7,7 @@
       class="form-control"
     />
   </div>
-  <accordion *ngIf="!contactName">
+  <accordion id="accordion-full" *ngIf="!contactName">
     <accordion-group
       *ngFor="let contact of paginatedContactList; let i = index"
       [isOpen]="true"
@@ -46,7 +46,7 @@
       (pageChanged)="pageChanged($event)"
     ></pagination>
   </accordion>
-  <accordion *ngIf="contactName">
+  <accordion id="accordion-search" *ngIf="contactName">
     <accordion-group
       *ngFor="let contact of filtredContactList; let i = index"
       [isOpen]="true"

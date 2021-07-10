@@ -1,0 +1,55 @@
+import { Contact } from 'src/app/create-contact/shared/contact.model';
+
+export const CONTACTLIST: Contact[] = [
+  {
+    id: 'adefee2c-2a83-477e-b844-fba7f23b1cf3',
+    nome: 'ARLINDO BONINA',
+    cpf: '01529871263',
+    logradouro: 'Rua Desembargador Arno Hoeschl',
+    bairro: 'Centro',
+    cep: '88015620',
+    localidade: 'Florianópolis',
+    uf: 'SC',
+  },
+  {
+    id: '931373ac-c8f4-4531-940b-0ddd55152a6a',
+    nome: 'CHARLESTON',
+    cpf: '90950445991',
+    logradouro: 'Rua Madalena Barbi',
+    bairro: 'Centro',
+
+    cep: '88015190',
+    localidade: 'Florianópolis',
+    uf: 'SC',
+  },
+  {
+    id: 'ac8d5522-f459-4b1e-95fa-4f1639b87a77',
+    nome: 'Guilherme Pfeifer',
+    cpf: '06655899990',
+    logradouro: 'Rua Francisco Tolentino',
+    bairro: 'Centro',
+    cep: '88010200',
+    localidade: 'Florianópolis',
+    uf: 'SC',
+  },
+  {
+    id: '4abd728f-1bad-42b1-b7df-cc3013b833b5',
+    nome: 'JOYCE',
+    cpf: '04700405996',
+    logradouro: 'Rua Madalena Barbi',
+    bairro: 'Centro',
+    cep: '88015190',
+    localidade: 'Florianópolis',
+    uf: 'SC',
+  },
+  {
+    id: '3543fdaa-69f3-408e-bf36-931cc798ffa8',
+    nome: 'Rodrigo Fernandes da Silva',
+    cpf: '04122165903',
+    logradouro: 'Rua João Meirelles',
+    bairro: 'Abraão',
+    cep: '88085201',
+    localidade: 'Florianópolis',
+    uf: 'SC',
+  },
+];

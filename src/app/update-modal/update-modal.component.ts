@@ -29,11 +29,11 @@ export class UpdateModalComponent implements OnInit {
     });
     this.service.getUfList().subscribe((UFLIST) => (this.ufs = UFLIST));
   }
-  onSubmit() {
+  onSubmit(): void {
     this.service.editContact(this.contactFormGroup.value);
     this.bsModalRef.hide();
   }
-  onReset() {
+  onReset(): void {
     this.contactFormGroup.reset();
   }
 }

@@ -3,7 +3,6 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Contact } from './shared/contact.model';
 import { ContactService } from './shared/contact.serivce';
 
-
 @Component({
   selector: 'app-create-contact',
   templateUrl: './create-contact.component.html',
@@ -12,16 +11,6 @@ import { ContactService } from './shared/contact.serivce';
 export class CreateContactComponent implements OnInit {
   ufs: string[];
   contactFormGroup: FormGroup;
-  contact: Contact = {
-    nome: '',
-    cpf: '',
-    cep: '',
-    logradouro: '',
-    bairro: '',
-    localidade: '',
-    uf: '',
-  };
-  public name: string;
   constructor(private service: ContactService) {}
 
   ngOnInit(): void {
@@ -36,11 +25,11 @@ export class CreateContactComponent implements OnInit {
     });
     this.service.getUfList().subscribe((UFLIST) => (this.ufs = UFLIST));
   }
-  onSubmit() {
-    this.service.createContact(this.contactFormGroup.value)
-    this.onReset()
+  onSubmit(): void {
+    this.service.createContact(this.contactFormGroup.value);
+    this.onReset();
   }
-  onReset() {
+  onReset(): void {
     this.contactFormGroup.reset();
   }
 }

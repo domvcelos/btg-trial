@@ -1,23 +1,23 @@
 import { Injectable } from '@angular/core';
 import { Observable, of, Subject } from 'rxjs';
 import { Contact } from './contact.model';
-import { UFLIST } from './create-contact.mock';
 import { v4 as uuidv4 } from 'uuid';
+import { UFLIST } from '../tests/create-contact.mock';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ContactService {
-  private subject = new Subject<any>();
-  sendReloadEvent() {
-    this.subject.next();
+  _subject = new Subject<any>();
+  sendReloadEvent(): void {
+    this._subject.next();
   }
   getReloadEvent(): Observable<any> {
-    return this.subject.asObservable();
+    return this._subject.asObservable();
   }
   createContact(contact: Contact): void {
     contact.id = uuidv4();
-    let storedContacts: Contact[] = localStorage.contacts
+    const storedContacts: Contact[] = localStorage.contacts
       ? JSON.parse(localStorage.contacts)
       : [];
     storedContacts.push(contact);
@@ -28,7 +28,7 @@ export class ContactService {
     return of(UFLIST);
   }
   getContactList(): Observable<Contact[]> {
-    let contacts: Contact[] = localStorage.contacts
+    const contacts: Contact[] = localStorage.contacts
       ? JSON.parse(localStorage.contacts)
       : [];
     return of(contacts);
@@ -48,7 +48,7 @@ export class ContactService {
     const contacts: Contact[] = localStorage.contacts
       ? JSON.parse(localStorage.contacts)
       : [];
-    let newListcontacts: Contact[] = contacts.filter(
+    const newListcontacts: Contact[] = contacts.filter(
       (contactStored) => contactStored.id !== contact.id
     );
     newListcontacts.push(contact);

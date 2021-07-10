@@ -21,13 +21,13 @@ export class ContactListComponent implements OnInit {
   paginatedContactList: Contact[];
   itemsPerPage = 6;
   searchInput: string;
-  clickEventsubscription: Subscription;
+  eventsubscription: Subscription;
   modalRef: BsModalRef;
   constructor(
     private service: ContactService,
     private modalService: BsModalService
   ) {
-    this.clickEventsubscription = this.service
+    this.eventsubscription = this.service
       .getReloadEvent()
       .subscribe(() => {
         this.getContacts();
@@ -37,19 +37,22 @@ export class ContactListComponent implements OnInit {
   ngOnInit(): void {
     this.getContacts();
   }
-  editModal(contact: Contact) {
+  editModal(contact: Contact): void {
     const initialState = {
-      contact: contact
+      contact,
     };
-    this.modalRef = this.modalService.show(UpdateModalComponent, {initialState});
-    
+    this.modalRef = this.modalService.show(UpdateModalComponent, {
+      initialState,
+    });
   }
 
-  deleteModal(contact: Contact) {
+  deleteModal(contact: Contact): void {
     const initialState = {
-      contact: contact
+      contact,
     };
-    this.modalRef = this.modalService.show(DeleteModalComponent, {initialState});
+    this.modalRef = this.modalService.show(DeleteModalComponent, {
+      initialState,
+    });
   }
   pageChanged(event: PageChangedEvent): void {
     const startItem = (event.page - 1) * event.itemsPerPage;
@@ -57,12 +60,12 @@ export class ContactListComponent implements OnInit {
     this.paginatedContactList = this.contactList.slice(startItem, endItem);
   }
 
-  onKey(event) {
-    this.filtredContactList = this.contactList.filter(function (contact) {
-      return contact.nome.toUpperCase().match(event.toUpperCase());
-    });
+  onKey(event): void {
+    this.filtredContactList = this.contactList.filter((contact) =>
+      contact.nome.toUpperCase().match(event.toUpperCase())
+    );
   }
-  getContacts() {
+  getContacts(): void {
     this.service
       .getContactList()
       .subscribe((CONTACTLIST) => (this.contactList = CONTACTLIST));

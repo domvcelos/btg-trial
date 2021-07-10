@@ -5,7 +5,6 @@
       <input
         type="text"
         class="form-control"
-        [(ngModel)]="contact.nome"
         formControlName="nome"
         id="nome"
       />
@@ -15,7 +14,6 @@
       <input
         type="text"
         class="form-control"
-        [(ngModel)]="contact.cpf"
         mask="000.000.000-00"
         formControlName="cpf"
         id="cpf"
@@ -26,7 +24,6 @@
       <input
         type="text"
         class="form-control"
-        [(ngModel)]="contact.cep"
         mask="00.000-000"
         formControlName="cep"
         id="cep"
@@ -37,7 +34,6 @@
       <input
         type="text"
         class="form-control"
-        [(ngModel)]="contact.logradouro"
         formControlName="logradouro"
         id="logradouro"
       />
@@ -47,7 +43,6 @@
       <input
         type="text"
         class="form-control"
-        [(ngModel)]="contact.bairro"
         formControlName="bairro"
         id="bairro"
       />
@@ -57,7 +52,6 @@
       <input
         type="text"
         class="form-control"
-        [(ngModel)]="contact.localidade"
         formControlName="localidade"
         id="localidade"
       />
@@ -71,6 +65,6 @@
         <option *ngFor="let uf of ufs" [ngValue]="uf">{{ uf }}</option>
       </select>
     </div>
-    <button class="btn btn-primary pull-right" type="submit">Salvar</button>
+    <button id="btn-submit" class="btn btn-primary pull-right" type="submit">Salvar</button>
   </form>
 </div>
