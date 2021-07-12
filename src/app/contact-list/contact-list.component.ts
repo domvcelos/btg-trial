@@ -60,9 +60,9 @@ export class ContactListComponent implements OnInit {
     this.paginatedContactList = this.contactList.slice(startItem, endItem);
   }
 
-  onKey(event): void {
+  onKey(name: string): void {
     this.filtredContactList = this.contactList.filter((contact) =>
-      contact.nome.toUpperCase().match(event.toUpperCase())
+      contact.nome.toUpperCase().match(name.toUpperCase())
     );
   }
   getContacts(): void {

@@ -1,6 +1,12 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import {
+  ComponentFixture,
+  fakeAsync,
+  TestBed,
+  tick,
+} from '@angular/core/testing';
+import { FormsModule, NgForm, ReactiveFormsModule } from '@angular/forms';
 import { By } from '@angular/platform-browser';
+import { CONTACTLIST } from 'src/app/contact-list/tests/contact-list.mock';
 import { CreateContactComponent } from '../create-contact.component';
 import { ContactService } from '../shared/contact.serivce';
 import { UFLIST } from './create-contact.mock';
@@ -9,6 +15,7 @@ describe('CreateContactComponent', () => {
   let component: CreateContactComponent;
   let fixture: ComponentFixture<CreateContactComponent>;
   let service: ContactService;
+  const testForm = <NgForm> { resetForm: () => null };
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -62,14 +69,13 @@ describe('CreateContactComponent', () => {
     const button = fixture.debugElement.queryAll(By.css('#btn-submit'));
     expect(button).toBeTruthy();
   });
-  it('should call onSubmit when click in submit button', () => {
+  it('should call onSubmit when click in submit button', fakeAsync(() => {
     spyOn(component, 'onSubmit');
-    const button = fixture.debugElement.query(By.css('#btn-submit'));
-    button.triggerEventHandler('click', null);
-    fixture.whenStable().then(() => {
-      expect(component.onSubmit).toHaveBeenCalled();
-    });
-  });
+    const button = fixture.debugElement.nativeElement.querySelector('button');
+    button.click();
+    tick();
+    expect(component.onSubmit).toHaveBeenCalled();
+  }));
   it('should instance ContactService', () => {
     expect(service).toBeTruthy();
   });
@@ -78,18 +84,27 @@ describe('CreateContactComponent', () => {
     service.getUfList().subscribe((res) => expect(res).toBe(UFLIST));
   });
   it('should call createContact when call onSubmit', () => {
+    component.contactFormGroup.patchValue({
+      ...CONTACTLIST[0],
+    });
     spyOn(service, 'createContact');
-    component.onSubmit();
+    const form = fixture.debugElement.nativeElement.querySelector('form');
+    component.onSubmit(testForm);
     expect(service.createContact).toHaveBeenCalled();
   });
-  it('should call onReset when call onSubmit', () => {
-    spyOn(component, 'onReset');
-    component.onSubmit();
-    expect(component.onReset).toHaveBeenCalled();
+  it('should added i on contact', () => {
+    const contact = CONTACTLIST[0];
+    delete contact.id;
+    service.createContact(contact);
+    expect(contact.id).toBeDefined();
   });
-  it('should call contactFormGroup.reset when call onReset', () => {
-    spyOn(component.contactFormGroup, 'reset');
-    component.onReset();
-    expect(component.contactFormGroup.reset).toHaveBeenCalled();
+  it('should delete contact contact', () => {
+    const contacts = CONTACTLIST;
+    localStorage.contacts = JSON.stringify(contacts);
+    service.deleteContact(contacts[0].id);
+    const recoverdContacts = localStorage.contacts
+      ? JSON.parse(localStorage.contacts)
+      : [];
+    expect(contacts.length).toBeGreaterThan(recoverdContacts.length);
   });
 });

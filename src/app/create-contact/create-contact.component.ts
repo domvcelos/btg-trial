@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormControl, FormGroup, NgForm, Validators } from '@angular/forms';
 import { Contact } from './shared/contact.model';
 import { ContactService } from './shared/contact.serivce';
 
@@ -25,11 +25,10 @@ export class CreateContactComponent implements OnInit {
     });
     this.service.getUfList().subscribe((UFLIST) => (this.ufs = UFLIST));
   }
-  onSubmit(): void {
-    this.service.createContact(this.contactFormGroup.value);
-    this.onReset();
-  }
-  onReset(): void {
-    this.contactFormGroup.reset();
+  onSubmit(form: NgForm): void {
+    if (this.contactFormGroup.valid) {
+      this.service.createContact(this.contactFormGroup.value);
+      form.resetForm();
+    }
   }
 }

@@ -12,7 +12,7 @@
 <div class="modal-body">
   <form
     [formGroup]="contactFormGroup"
-    #contactEditForm="ngForm"
+    #form="ngForm"
     (ngSubmit)="onSubmit()"
   >
     <div class="form-group">
@@ -100,7 +100,7 @@
       class="btn btn-danger"
       [popover]="popTemplate"
       popoverTitle="Dynamic html inside"
-      (click)="contactEditForm.ngSubmit.emit()"
+      (click)="form.ngSubmit.emit()"
     >
       Confirmar
     </button></ng-template

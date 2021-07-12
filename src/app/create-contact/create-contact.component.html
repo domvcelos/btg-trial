@@ -1,5 +1,5 @@
 <div class="container">
-  <form [formGroup]="contactFormGroup" (validSubmit)="onSubmit()">
+  <form [formGroup]="contactFormGroup" #form="ngForm" (submit)="onSubmit(form)">
     <div class="form-group">
       <label for="nome" class="control-label">Nome</label>
       <input

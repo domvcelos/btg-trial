@@ -21,19 +21,22 @@ export class UpdateModalComponent implements OnInit {
       nome: new FormControl(this.contact.nome, [Validators.required]),
       cpf: new FormControl(this.contact.cpf, [Validators.required]),
       cep: new FormControl(this.contact.cep, [Validators.required]),
-      logradouro: new FormControl(this.contact.logradouro, [Validators.required]),
+      logradouro: new FormControl(this.contact.logradouro, [
+        Validators.required,
+      ]),
       bairro: new FormControl(this.contact.bairro, [Validators.required]),
-      localidade: new FormControl(this.contact.localidade, [Validators.required]),
+      localidade: new FormControl(this.contact.localidade, [
+        Validators.required,
+      ]),
       uf: new FormControl(this.contact.uf, [Validators.required]),
       id: new FormControl(this.contact.id, [Validators.required]),
     });
     this.service.getUfList().subscribe((UFLIST) => (this.ufs = UFLIST));
   }
   onSubmit(): void {
-    this.service.editContact(this.contactFormGroup.value);
-    this.bsModalRef.hide();
-  }
-  onReset(): void {
-    this.contactFormGroup.reset();
+    if (this.contactFormGroup.valid) {
+      this.service.editContact(this.contactFormGroup.value);
+      this.bsModalRef.hide();
+    }
   }
 }

@@ -7,7 +7,7 @@
       class="form-control"
     />
   </div>
-  <accordion id="accordion-full" *ngIf="!contactName">
+  <accordion id="accordion-all" *ngIf="!contactName">
     <accordion-group
       *ngFor="let contact of paginatedContactList; let i = index"
       [isOpen]="true"
@@ -16,11 +16,11 @@
       <div class="btn btn-link btn-block clearfix" accordion-heading>
         <div class="pull-left float-left">{{ contact.nome }}</div>
         <span class="badge float-right pull-right"
-          ><button (click)="deleteModal(contact)">
+          ><button  [id]="'delete-btn-' + contact.id" (click)="deleteModal(contact)">
             <i-bs name="trash"></i-bs></button
         ></span>
         <span class="badge float-right pull-right"
-          ><button (click)="editModal(contact)">
+          ><button [id]="'edit-btn-' + contact.id" (click)="editModal(contact)">
             <i-bs name="pencil-square"> </i-bs></button
         ></span>
       </div>

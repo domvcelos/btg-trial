@@ -8,12 +8,12 @@ import { UFLIST } from '../tests/create-contact.mock';
   providedIn: 'root',
 })
 export class ContactService {
-  _subject = new Subject<any>();
+  subject = new Subject<any>();
   sendReloadEvent(): void {
-    this._subject.next();
+    this.subject.next();
   }
   getReloadEvent(): Observable<any> {
-    return this._subject.asObservable();
+    return this.subject.asObservable();
   }
   createContact(contact: Contact): void {
     contact.id = uuidv4();
